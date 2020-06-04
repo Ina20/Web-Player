@@ -9,9 +9,10 @@ window.onload = function() {
     hls.on(Hls.Events.MEDIA_ATTACHED, function () {
       console.log("video and hls.js are now bound together !");
       hls.loadSource("http://my.streamURL.com/playlist.m3u8");
-          hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-            console.log("manifest loaded, found " + data.levels.length + " quality level");
-          });
+      hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+        console.log("manifest loaded, found " + data.levels.length + " quality level");
+        video.play();
       });
+    });
   }
 }
