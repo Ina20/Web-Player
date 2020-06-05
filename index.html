@@ -2,12 +2,39 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Page Title</title>
+  <title>Video Waffle</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="styles/global.css">
   <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
   <script src="main.js"></script>
 </head>
 <body>
-  <video width="720" height="480" controls id="video"></video>
+  <nav class="navbar navbar-light bg-light">
+    <img class="logo" src="images/logo.png" width="50" height="50">
+    <p class="title">Video Waffle<p>
+  </nav>
+  <div class="container">
+    <div class="col-sm-8 input">
+      <form>
+        <div class="form-group">
+          <label for="formGroupExampleInput">Enter video URL</label>
+          <input type="text" class="form-control" id="formGroupExampleInput" placeholder="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8">
+        </div>
+        <div class="form-group row col-md-10 choose">
+          <label for="inputState" class="col-sm-4 col-form-label">Or just choose one</label>
+          <div class="col-sm-8">
+            <select id="inputState" class="form-control">
+              <option selected>Choose...</option>
+              <option>...</option>
+            </select>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-sm-8 vid">
+      <video width="720" height="480" controls id="video"></video>
+    </div>
+  </div>
 </body>
 </html>

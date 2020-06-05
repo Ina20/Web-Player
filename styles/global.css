@@ -1,3 +1,35 @@
 body {
-  background-color: coral;
+  background-color: #bff0cf;
+}
+.navbar {
+  background-color: white;
+  height: 65px;
+  padding-top: 0px;
+  display: flex;
+}
+.container {
+  display: block;
+  padding: 3px;
+  margin-top: 20px;
+}
+.title {
+  font-size: 28px;
+  font-family: 'Nunito', sans-serif;
+  text-align: center;
+  line-height: 50px;
+}
+.logo {
+  padding-top: 0px;
+}
+.input {
+  margin: auto;
+  padding: 3px;
+  margin-bottom: 3px;
+  font-family: 'Nunito', sans-serif;
+}
+.vid {
+  margin: auto;
+}
+.choose {
+  margin: auto;
 }
