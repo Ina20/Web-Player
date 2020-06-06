@@ -69,10 +69,30 @@ function setVideo(){
           level[i] = Math.round(hls.levels[i].bitrate/1024);
           console.log(level[i] + "kb");
           makeButton(level[i]);
+          console.log("name: " + hls.levels[i].name);
+          console.log("height: " + hls.levels[i].height);
+          console.log("width: " + hls.levels[i].width);
+          console.log("codecs: " + hls.levels[i].codecs);
         }
+
+        showInfo(hls.currentLevel);
       });
     });
   }
 
+  function showInfo(level){
+    console.log(level);
+    //console.log(height);
+    let bitrate = document.getElementById("infoBitrate");
+    let height = document.getElementById("infoHeight");
+    let width = document.getElementById("infoWidth");
+    let vCodec = document.getElementById("infoVCodec");
+    let aCodec = document.getElementById("infoACodec");
+    bitrate.innerHTML = level;
+    height.innerHTML = "a";
+    width.innerHTML = "b";
+    vCodec.innerHTML = "c";
+    aCodec.innerHTML = "d";
+  }
 
 };

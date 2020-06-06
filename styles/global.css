@@ -31,9 +31,15 @@ body {
   margin: auto;
   margin-top: 5px;
   width: 7200px;
+  justify-content: center;
+  align-items: center;
 }
 .choose {
   margin: auto;
+}
+.inline {
+  padding-top: 5px;
+  display: inline-block;
 }
 #bitrateButtons {
   margin: auto;
@@ -56,4 +62,11 @@ body {
   font-family: 'Nunito', sans-serif;
   margin-top: 15px;
   padding-right: 5px;
+}
+#info {
+  margin-top: 30px;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  font-family: 'Nunito', sans-serif;
 }
