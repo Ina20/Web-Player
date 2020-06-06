@@ -29,7 +29,31 @@ body {
 }
 .vid {
   margin: auto;
+  margin-top: 5px;
+  width: 7200px;
 }
 .choose {
   margin: auto;
+}
+#bitrateButtons {
+  margin: auto;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#qualityButton {
+  width: 100px;
+  height: 30px;
+  font-family: 'Nunito', sans-serif;
+  background-color: #6fd6ff;
+  border: none;
+  margin-right: 3px;
+  padding-top: 2px;
+}
+#bitratesTxt {
+  font-family: 'Nunito', sans-serif;
+  margin-top: 15px;
+  padding-right: 5px;
 }

@@ -19,7 +19,7 @@
       <form>
         <div class="form-group">
           <label for="formGroupExampleInput">Enter video URL</label>
-          <input type="text" class="form-control" id="formGroupExampleInput" placeholder="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8">
+          <input type="text" class="form-control" id="url" onsubmit"submit()" placeholder="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8">
         </div>
         <div class="form-group row col-md-10 choose">
           <label for="inputState" class="col-sm-4 col-form-label">Or just choose one</label>
@@ -27,12 +27,13 @@
             <select id="inputState" class="form-control" onchange="setVideo()">
               <option selected>Big Buck Bunny</option>
               <option>About Parkour</option>
-              <option>Durian Open Movie Project</option>
+              <option>Sintel</option>
             </select>
           </div>
         </div>
       </form>
     </div>
+    <div  id="bitrateButtons"></div>
     <div class="col-sm-8 vid">
       <video width="720" height="480" controls id="video"></video>
     </div>

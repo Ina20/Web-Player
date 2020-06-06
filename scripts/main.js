@@ -1,8 +1,10 @@
 let link = "";
+let level = [];
 
 window.onload = function() {
 
   document.getElementById('inputState').addEventListener('change', function() {
+
     link = this.value;
     switch(link) {
       case "Big Buck Bunny":
@@ -13,7 +15,7 @@ window.onload = function() {
         link = "https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8";
         console.log(link);
         break;
-      case "Durian Open Movie Project":
+      case "Sintel":
         link = "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8";
         console.log(link);
         break;
@@ -24,8 +26,35 @@ window.onload = function() {
 
 }
 
+function submit(){
+  let customURL = document.getElementById("url").value;
+  console.log(customURL);
+  return false;
+}
+function makeP(){
+  var p = document.createElement("p");
+  p.innerHTML = "Available bitrates: "
+  p.setAttribute("id", "bitratesTxt");
+  document.getElementById("bitrateButtons").appendChild(p);
+}
+
+function makeButton(level){
+  var btn = document.createElement("BUTTON");
+  btn.innerHTML = level + " kb";
+  btn.setAttribute("id", "qualityButton");
+  document.getElementById("bitrateButtons").appendChild(btn);
+}
+function removeButton(){
+  const parent = document.getElementById("bitrateButtons");
+  while (parent.firstChild) {
+    parent.firstChild.remove();
+  }
+}
+
 function setVideo(){
   console.log("Hello!");
+  removeButton();
+  makeP();
   if (Hls.isSupported()) {
     console.log("hello hls.js!");
     var video = document.getElementById('video');
@@ -36,7 +65,14 @@ function setVideo(){
       hls.loadSource(link);
       hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
         console.log("manifest loaded, found " + data.levels.length + " quality level");
+        for(i=0; i < hls.levels.length; i++){
+          level[i] = Math.round(hls.levels[i].bitrate/1024);
+          console.log(level[i] + "kb");
+          makeButton(level[i]);
+        }
       });
     });
   }
+
+
 };
