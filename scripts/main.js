@@ -1,5 +1,6 @@
 let link = "";
 let level = [];
+let hls;
 
 window.onload = function() {
 
@@ -38,10 +39,19 @@ function makeP(){
   document.getElementById("bitrateButtons").appendChild(p);
 }
 
-function makeButton(level){
+function makeButton(level, i){
   var btn = document.createElement("BUTTON");
   btn.innerHTML = level + " kb";
-  btn.setAttribute("id", "qualityButton");
+  btn.setAttribute("class", "qualityButton");
+  btn.setAttribute("id", "qualityButton" + i);
+  btn.addEventListener("click", function(){
+    let splitID = this.id.split('qualityButton')[1];
+    let splitIDNumber = parseInt(splitID);
+    let newLevel = splitIDNumber+1;
+    hls.currentLevel = newLevel;
+
+    showInfo(level, splitIDNumber);
+  });
   document.getElementById("bitrateButtons").appendChild(btn);
 }
 function removeButton(){
@@ -49,6 +59,18 @@ function removeButton(){
   while (parent.firstChild) {
     parent.firstChild.remove();
   }
+}
+function showInfo(level, i){
+  let bitrate = document.getElementById("infoBitrate");
+  let width = document.getElementById("infoWidth");
+  let height = document.getElementById("infoHeight");
+  let vCodec = document.getElementById("infoVCodec");
+  let aCodec = document.getElementById("infoACodec");
+  bitrate.innerHTML = level + " kb";
+  width.innerHTML = hls.levels[i].width;
+  height.innerHTML = hls.levels[i].height;
+  vCodec.innerHTML = hls.levels[i].codecs;
+  aCodec.innerHTML = hls.levels[i].codecs;
 }
 
 function setVideo(){
@@ -58,7 +80,7 @@ function setVideo(){
   if (Hls.isSupported()) {
     console.log("hello hls.js!");
     var video = document.getElementById('video');
-    var hls = new Hls();
+    hls = new Hls();
     hls.attachMedia(video);
     hls.on(Hls.Events.MEDIA_ATTACHED, function () {
       console.log("video and hls.js are now bound together !");
@@ -68,31 +90,15 @@ function setVideo(){
         for(i=0; i < hls.levels.length; i++){
           level[i] = Math.round(hls.levels[i].bitrate/1024);
           console.log(level[i] + "kb");
-          makeButton(level[i]);
+          makeButton(level[i], i);
           console.log("name: " + hls.levels[i].name);
           console.log("height: " + hls.levels[i].height);
           console.log("width: " + hls.levels[i].width);
           console.log("codecs: " + hls.levels[i].codecs);
         }
 
-        showInfo(hls.currentLevel);
       });
     });
-  }
-
-  function showInfo(level){
-    console.log(level);
-    //console.log(height);
-    let bitrate = document.getElementById("infoBitrate");
-    let height = document.getElementById("infoHeight");
-    let width = document.getElementById("infoWidth");
-    let vCodec = document.getElementById("infoVCodec");
-    let aCodec = document.getElementById("infoACodec");
-    bitrate.innerHTML = level;
-    height.innerHTML = "a";
-    width.innerHTML = "b";
-    vCodec.innerHTML = "c";
-    aCodec.innerHTML = "d";
   }
 
 };
