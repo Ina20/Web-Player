@@ -10,28 +10,30 @@ window.onload = function() {
     switch(link) {
       case "Big Buck Bunny":
         link = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";
-        console.log(link);
         break;
       case "About Parkour":
         link = "https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8";
-        console.log(link);
         break;
       case "Sintel":
         link = "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8";
-        console.log(link);
+        break;
+      case "Interview":
+        link = "https://mnmedias.api.telequebec.tv/m3u8/29880.m3u8";
         break;
     default:
       console.log("default");
     }
   });
-
 }
 
-function submit(){
-  let customURL = document.getElementById("url").value;
-  console.log(customURL);
-  return false;
+function customURL(event){
+  if(event.which == 13){
+    console.log(document.getElementById("url").value);
+    link = document.getElementById("url").value;
+    setVideo();
+  }
 }
+
 function makeP(){
   var p = document.createElement("p");
   p.innerHTML = "Available bitrates: "
@@ -46,20 +48,20 @@ function makeButton(level, i){
   btn.setAttribute("id", "qualityButton" + i);
   btn.addEventListener("click", function(){
     let splitID = this.id.split('qualityButton')[1];
-    let splitIDNumber = parseInt(splitID);
-    let newLevel = splitIDNumber+1;
+    let newLevel = parseInt(splitID);
     hls.currentLevel = newLevel;
-
-    showInfo(level, splitIDNumber);
+    showInfo(level, newLevel);
   });
   document.getElementById("bitrateButtons").appendChild(btn);
 }
+
 function removeButton(){
   const parent = document.getElementById("bitrateButtons");
   while (parent.firstChild) {
     parent.firstChild.remove();
   }
 }
+
 function showInfo(level, i){
   let bitrate = document.getElementById("infoBitrate");
   let width = document.getElementById("infoWidth");
@@ -89,16 +91,9 @@ function setVideo(){
         console.log("manifest loaded, found " + data.levels.length + " quality level");
         for(i=0; i < hls.levels.length; i++){
           level[i] = Math.round(hls.levels[i].bitrate/1024);
-          console.log(level[i] + "kb");
           makeButton(level[i], i);
-          console.log("name: " + hls.levels[i].name);
-          console.log("height: " + hls.levels[i].height);
-          console.log("width: " + hls.levels[i].width);
-          console.log("codecs: " + hls.levels[i].codecs);
         }
-
       });
     });
   }
-
 };
